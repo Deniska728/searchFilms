@@ -7,12 +7,35 @@
   <title>Document</title>
   <link rel="stylesheet" href="./styles/reset.css">
   <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="./styles/display-2.css">
 </head>
 <body>
-  <form>
-    <input type="search">
-    <input type="submit" value="Начать поиск">
-  </form>
+  <div class="display-1">
+    <form>
+        <input type="search">
+        <input type="submit" value="Начать поиск">
+    </form>
+    <div class="favorites">
+    </div>
+    <div class="list-films"></div>
+    <p></p>
+  </div>
+  <div class="display-2">
+    <div class="display-2-header">
+      <button class="exit">&#8592;</button>
+      <button class="fav">Добавить в избранное</button>
+    </div>
+    <div class="display-2-body">
+      <img src="./img/notfound.png" alt="">
+      <div class="film-info">
+        <h3>Title(1970)</h3>
+        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus totam ducimus, aliquid quo incidunt explicabo quisquam mollitia assumenda labore repellat dolor cumque praesentium laudantium quod amet iste, nostrum, omnis eveniet.</p>
+        <p class="genre"></p>
+        <p class="rating"></p>
+      </div> 
+    </div>
+  </div>
+  <script src="./js/film.js"></script>
   <script src="./js/helper.js"></script>
   <script src="./js/getPosters.js"></script>
   <script src="./js/searchFilms.js"></script>

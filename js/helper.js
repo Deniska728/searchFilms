@@ -1,29 +1,30 @@
+let filmContainer = document.querySelector('.list-films')
+const img = document.querySelector('.display-2-body > img')
+const p = document.querySelector('.display-2-body p')
+const h3 = document.querySelector('.display-2-body h3')
+const genre = document.querySelector('.display-2-body .genre')
+const rating = document.querySelector('.rating')
+
 const createList = array => {
-  const listFilms = document.createElement('div')
-  listFilms.classList.add('list-films')
+  filmContainer.innerHTML = ''
 
   array.map( item => {
-    const itemFilm = document.createElement('div')
-    const img = document.createElement('img')
-    const title = document.createElement('p')
-
-    img.alt = ''
-    if(item.Poster !== 'N/A'){
-      img.src = item.Poster
-    } else {
-      img.alt = 'Нет постера'
-    }
-    title.innerHTML = item.Title
-    itemFilm.classList.add('list-item')
-    itemFilm.appendChild(img)
-    itemFilm.appendChild(title)
-    listFilms.appendChild(itemFilm)
+    filmContainer.appendChild(new Film(item).render())
   })
-
-  document.body.appendChild(listFilms)
 }
 
-const removeUnnecessaryElements = selector => {
-  const element = document.querySelector(selector)
-  if(element) document.body.removeChild(element)
+const createFilm = options => {
+  console.log(options);
+  const { Poster, Title, Year, Plot, Genre, imdbRating } = options
+  img.src = Poster !== 'N/A' ? Poster : './img/notfound.png'
+  p.innerHTML = `<span class="bold">Description:</span> ${Plot}`
+  h3.innerHTML = `${Title}(${Year})`
+  genre.innerHTML = `<span class="bold">Genre:</span> ${Genre}`
+  rating.innerHTML = `<span class="bold">IMDb rating:</span> ${imdbRating}`
 }
+
+const clickToExit = () => {
+  document.querySelector('.display-1').style.display = 'block'
+  document.querySelector('.display-2').style.display = 'none'
+}
+

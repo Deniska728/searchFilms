@@ -1,0 +1,61 @@
+h3, p{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.display-2{
+  width: 100%;
+  display: none;
+}
+
+.display-2-header{
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.display-2-header button {
+  border: 0;
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #4c5a65;
+  color: #ffffff;
+}
+
+.exit{
+  font-size: 30px;
+  line-height: 100%;
+  padding-bottom: 8px !important;
+}
+
+.display-2-body{
+  width: 80%;
+  margin: auto;
+  display: flex;
+  padding: 10px 60px;
+}
+
+.display-2-body > img, .film-info{
+  margin: 10px;
+}
+
+.film-info h3{
+  font-size: 1.5rem;
+  font-weight: 600
+}
+
+.display-2-body p{
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  margin-top: 10px;
+}
+
+.description{
+  margin-top: 40px;
+}
+
+.bold{
+  font-weight: bold;
+}
