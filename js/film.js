@@ -1,29 +1,24 @@
 class Film{
   constructor(options){
     this.options = options
-  }
-
-  openFilm(e, imdbID){
-    e.preventDefault()
-    getFilms(`http://www.omdbapi.com/?i=${imdbID}&apikey=d5677312`)
-    .then( result => {
-      createFilm(result)
-      document.querySelector('.display-1').style.display = 'none'
-      document.querySelector('.display-2').style.display = 'block'
-
-      const buttonExit = document.querySelector('.exit')
-      buttonExit.addEventListener('click', clickToExit)
-    })
+    this.favorite = false
+    this.favorites = document.querySelector('.favorites')
+    this.removeFromStorage = removeFromStorage
+    this.openFilm = openFilm
   }
 
   insertToStorage(e, imdbID){
-    const filmClone = document.querySelector(`div[data-id="${imdbID}"`).parentElement.cloneNode(true)
-    const favorites = document.querySelector('.favorites')
-    favorites.appendChild(filmClone)
     const films = JSON.parse(localStorage.getItem('films') || "[]")
+    for(let film of films){
+      if(film['imdbID'] == imdbID){
+        this.removeFromStorage(null, imdbID)
+        return
+      }
+    }
     films.push(this.options)
     try {
       localStorage.setItem('films', JSON.stringify(films))
+      renderFilmsToFavorites()
     } catch (error) {
       alert('Память заполнена.')
     }
@@ -46,6 +41,7 @@ class Film{
     img.src = Poster !== 'N/A' ? Poster : './img/notfound.png'
     title.innerHTML = `${Title}(${Year})`
     itemFilm.classList.add('list-item')
+    itemFilm.dataset.idFilm = imdbID
     itemFilm.appendChild(img)
     itemFilm.appendChild(a)
     itemFilm.appendChild(fav)

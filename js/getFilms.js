@@ -1,5 +1,3 @@
-const textError = document.querySelector('.display-1 > p')
-
 const getFilms = async url => { 
   const responce = await fetch(url, { method: 'GET'})
   const films = await responce.json()
