@@ -17,7 +17,7 @@ const insertToStorage = options => {
   for(let film of films){
     if(film['imdbID'] == options.imdbID){
       removeFromStorage(null, options.imdbID)
-      button.classList.remove('fav-click')
+      button !== null ? button.classList.remove('fav-click') : ''
       buttonFav.classList.remove('fav-click')
       return
     }
