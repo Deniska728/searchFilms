@@ -15,7 +15,10 @@
         <input type="search">
         <input type="submit" value="Начать поиск">
     </form>
-    <div class="favorites">
+    <div class="favorites-container">
+      <p>Избранное:</p>
+      <div class="favorites">
+      </div>
     </div>
     <div class="list-films"></div>
     <p></p>
@@ -23,7 +26,6 @@
   <div class="display-2">
     <div class="display-2-header">
       <button class="exit">&#8592;</button>
-      <button class="fav">Добавить в избранное</button>
     </div>
     <div class="display-2-body">
       <img src="./img/notfound.png" alt="">
@@ -37,8 +39,8 @@
   </div>
   <script src="./js/helper.js"></script>
   <script src="./js/storage.js"></script>
-  <script src="./js/film.js"></script>
-  <script src="./js/getFilms.js"></script>
+  <script src="./js/Film.js"></script>
+  <script src="./js/Api.js"></script>
   <script src="./js/searchFilms.js"></script>
 </body>
 </html>
