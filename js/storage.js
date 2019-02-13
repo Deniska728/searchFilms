@@ -18,6 +18,7 @@ const insertToStorage = options => {
     if(film['imdbID'] == options.imdbID){
       removeFromStorage(null, options.imdbID)
       button !== null ? button.classList.remove('fav-click') : ''
+      d2Button !== null ? d2Button.classList.remove('fav-click') : ''
       buttonFav.classList.remove('fav-click')
       return
     }

@@ -17,7 +17,7 @@ const createList = array => {
 
 const createFilm = options => {
   const { Poster, Title, Year, Plot, Genre, imdbRating } = options
-
+  const films = JSON.parse(localStorage.getItem('films') || "[]")
   const buttonFav = document.querySelector('.display-2-header button.fav')
   buttonFav ? header.removeChild(buttonFav) : ''
 
@@ -25,6 +25,11 @@ const createFilm = options => {
   favor.classList.add('fav')
   favor.innerHTML = '♥'
   favor.addEventListener('click', e => insertToStorage(options))
+  films.map( film => {
+    if(film['imdbID'] == options.imdbID){
+      favor.classList.add('fav-click')
+    }
+  }) 
   header.appendChild(favor)
   img.src = Poster !== 'N/A' ? Poster : './img/notfound.png'
   p.innerHTML = `<span class="bold">Description:</span> ${Plot}`
