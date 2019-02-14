@@ -1,6 +1,6 @@
 const url = 'http://www.omdbapi.com/'
 
-class Api {
+export default class Api {
   static async getFilms(query){
     try {
       const responce = await fetch(`${url}/${query}&apikey=d5677312`)

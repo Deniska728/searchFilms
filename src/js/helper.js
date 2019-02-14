@@ -1,21 +1,25 @@
-let filmContainer = document.querySelector('.list-films')
+import Film from './Film';
+
+export let filmContainer = document.querySelector('.list-films')
+export const textError = document.querySelector('.display-1 > p')
+
 const img = document.querySelector('.display-2-body > img')
 const p = document.querySelector('.display-2-body p')
 const h3 = document.querySelector('.display-2-body h3')
 const genre = document.querySelector('.display-2-body .genre')
 const rating = document.querySelector('.rating')
-const textError = document.querySelector('.display-1 > p')
 const header = document.querySelector('.display-2-header')
 const buttonExit = document.querySelector('.exit')
 
-const createList = array => {
+
+export const createList = array => {
   filmContainer.innerHTML = ''
   array.map( item => {
     filmContainer.appendChild(new Film(item).render())
   })
 }
 
-const createFilm = options => {
+export const createFilm = options => {
   const { Poster, Title, Year, Plot, Genre, imdbRating } = options
   const films = JSON.parse(localStorage.getItem('films') || "[]")
   const buttonFav = document.querySelector('.display-2-header button.fav')
@@ -38,20 +42,45 @@ const createFilm = options => {
   rating.innerHTML = `<span class="bold">IMDb rating:</span> ${imdbRating}`
 }
 
-const openFilm = (e, imdbID) => {
-  e.preventDefault()
-  Api.getFilms(`?i=${imdbID}`)
-  .then( result => {
-    createFilm(result)
-    document.querySelector('.display-1').style.display = 'none'
-    document.querySelector('.display-2').style.display = 'block'
-  })
-}
-
-const clickToExit = () => {
+export const clickToExit = () => {
   document.querySelector('.display-1').style.display = 'block'
   document.querySelector('.display-2').style.display = 'none'
 }
 buttonExit.addEventListener('click', clickToExit)
 
+export function removeFromStorage(e, imdbID){
+  const films = JSON.parse(localStorage.getItem('films') || "[]")
+  films.map( film => {
+    if(film['imdbID'] == imdbID){
+      films.splice(films.indexOf(film), 1)
+    }
+  })
+  localStorage.setItem('films', JSON.stringify(films))
+  new Film().renderFilmsToFavorites()
+}
+
+const insertToStorage = options => {
+  const films = JSON.parse(localStorage.getItem('films') || "[]")
+  const button = document.querySelector(`.list-films .fav[data-id="${options.imdbID}"]`)
+  const buttonFav = document.querySelector(`.favorites .fav[data-id="${options.imdbID}"]`)
+  const d2Button = document.querySelector('.display-2 .fav')
+  for(let film of films){
+    if(film['imdbID'] == options.imdbID){
+      removeFromStorage(null, options.imdbID)
+      button !== null ? button.classList.remove('fav-click') : ''
+      d2Button !== null ? d2Button.classList.remove('fav-click') : ''
+      buttonFav.classList.remove('fav-click')
+      return
+    }
+  }
+  films.push(options)
+  try {
+    localStorage.setItem('films', JSON.stringify(films))
+    button !== null ? button.classList.add('fav-click') : ''
+    d2Button.classList.add('fav-click')
+    new Film().renderFilmsToFavorites()
+  } catch (error) {
+    alert('Память заполнена.')
+  }
+}
 

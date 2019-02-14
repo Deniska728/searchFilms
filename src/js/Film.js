@@ -1,11 +1,23 @@
-class Film{
+import { removeFromStorage, createFilm } from './helper.js';
+import Api from './Api';
+
+export default class Film{
   constructor(options){
     this.options = options
     this.favorite = false
     this.favorites = document.querySelector('.favorites')
     this.removeFromStorage = removeFromStorage
-    this.openFilm = openFilm
     this.storageData = JSON.parse(localStorage.getItem('films') || "[]")
+  }
+
+  openFilm (e, imdbID){
+    e.preventDefault()
+    Api.getFilms(`?i=${imdbID}`)
+    .then( result => {
+      createFilm(result)
+      document.querySelector('.display-1').style.display = 'none'
+      document.querySelector('.display-2').style.display = 'block'
+    })
   }
 
   renderFilmsToFavorites(){
@@ -76,5 +88,3 @@ class Film{
     return itemFilm
   }
 }
-
-new Film().renderFilmsToFavorites()
