@@ -2,11 +2,12 @@
   "name": "searchfilms",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -p",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server --hot"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "image-webpack-loader": "^4.6.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.3",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
   }
 }

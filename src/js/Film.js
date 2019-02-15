@@ -76,7 +76,7 @@ export default class Film{
     a.innerHTML = 'Узнать больше'
     a.addEventListener('click', e => this.openFilm(e, imdbID))
     img.alt = ''
-    img.src = Poster !== 'N/A' ? Poster : './img/notfound.png'
+    img.src = Poster !== 'N/A' ? Poster : './src/img/notfound.png'
     title.innerHTML = `${Title}(${Year})`
     itemFilm.classList.add('list-item')
     itemFilm.dataset.idFilm = imdbID

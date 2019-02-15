@@ -35,7 +35,7 @@ export const createFilm = options => {
     }
   }) 
   header.appendChild(favor)
-  img.src = Poster !== 'N/A' ? Poster : './img/notfound.png'
+  img.src = Poster !== 'N/A' ? Poster : './src/img/notfound.png'
   p.innerHTML = `<span class="bold">Description:</span> ${Plot}`
   h3.innerHTML = `${Title}(${Year})`
   genre.innerHTML = `<span class="bold">Genre:</span> ${Genre}`
