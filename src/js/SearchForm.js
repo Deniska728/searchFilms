@@ -1,16 +1,19 @@
 import Api from './Api.js'
-import { createList, textError, filmContainer } from './helper.js'
+import { textError, filmContainer } from './helper.js'
+import { app } from './index';
 
 export default class SearchForm {
-  
   embeded(url){
+    app.films = []
+    textError.innerHTML = 'Loading...'
     Api.getFilms(url)
       .then( result => {
         if(result.Response === "False") throw ('Ничего не найдено')
+        app.films = result
         textError.innerHTML = ''
-        createList(result)
       })
       .catch( error => {
+        app.films = []
         filmContainer.innerHTML = ''
         textError.innerHTML = error
       })
@@ -45,3 +48,4 @@ export default class SearchForm {
     `
   }
 }
+

@@ -12,11 +12,14 @@ const header = document.querySelector('.display-2-header')
 const buttonExit = document.querySelector('.exit')
 
 
-export const createList = array => {
-  filmContainer.innerHTML = ''
-  array.map( item => {
-    filmContainer.appendChild(new Film(item).render())
-  })
+export const renderFilmsToFavorites = () =>{
+  const films = JSON.parse(localStorage.getItem('films') || "[]")
+  const favorites = document.querySelector('.favorites')
+  favorites.innerHTML = ''
+  for(let film of films){
+    const itemFilm = new Film().render(film, removeFromStorage)
+    favorites.appendChild(itemFilm)
+  }
 }
 
 export const createFilm = options => {
@@ -56,7 +59,7 @@ export function removeFromStorage(e, imdbID){
     }
   })
   localStorage.setItem('films', JSON.stringify(films))
-  new Film().renderFilmsToFavorites()
+  renderFilmsToFavorites()
 }
 
 const insertToStorage = options => {
@@ -78,7 +81,7 @@ const insertToStorage = options => {
     localStorage.setItem('films', JSON.stringify(films))
     button !== null ? button.classList.add('fav-click') : ''
     d2Button.classList.add('fav-click')
-    new Film().renderFilmsToFavorites()
+    renderFilmsToFavorites()
   } catch (error) {
     alert('Память заполнена.')
   }

@@ -1,5 +1,6 @@
-import { removeFromStorage, createFilm } from './helper.js';
 import Api from './Api';
+import { removeFromStorage, createFilm } from './helper';
+import image from '../img/notfound.png'
 
 export default class Film{
   constructor(options){
@@ -10,7 +11,7 @@ export default class Film{
     this.storageData = JSON.parse(localStorage.getItem('films') || "[]")
   }
 
-  openFilm (e, imdbID){
+  openFilm(e, imdbID){
     e.preventDefault()
     Api.getFilms(`?i=${imdbID}`)
     .then( result => {
@@ -18,37 +19,6 @@ export default class Film{
       document.querySelector('.display-1').style.display = 'none'
       document.querySelector('.display-2').style.display = 'block'
     })
-  }
-
-  renderFilmsToFavorites(){
-    const films = JSON.parse(localStorage.getItem('films') || "[]")
-    this.favorites.innerHTML = ''
-    for(let film of films){
-      const itemFilm = this.render(film, this.removeFromStorage)
-      this.favorites.appendChild(itemFilm)
-    }
-  }
-
-  insertToStorage(e, imdbID){
-    const films = JSON.parse(localStorage.getItem('films') || "[]")
-    const buttonFav = document.querySelector(`.favorites .fav[data-id="${imdbID}"]`)
-    const button = document.querySelector(`.list-films .fav[data-id="${imdbID}"]`)
-    for(let film of films){
-      if(film['imdbID'] == imdbID){
-        this.removeFromStorage(null, imdbID)
-        buttonFav.classList.remove('fav-click')
-        button.classList.remove('fav-click')
-        return
-      }
-    }
-    films.push(this.options)
-    try {
-      localStorage.setItem('films', JSON.stringify(films))
-      button.classList.add('fav-click')
-      this.renderFilmsToFavorites()
-    } catch (error) {
-      alert('Память заполнена.')
-    }
   }
 
   render(film, callback){
@@ -68,15 +38,13 @@ export default class Film{
     fav.dataset.id = imdbID
     fav.innerHTML = '♥'
     fav.classList.add('fav')
-    callback !== undefined || null ?  fav.classList.add('fav-click') : ''
-    fav.addEventListener('click', e => {
-      callback !== undefined || null ? callback(e, imdbID) : this.insertToStorage(e, imdbID) 
-    })
+    fav.classList.add('fav-click')
+    fav.addEventListener('click', e => callback(e, imdbID) )
     a.href = '#'
     a.innerHTML = 'Узнать больше'
     a.addEventListener('click', e => this.openFilm(e, imdbID))
     img.alt = ''
-    img.src = Poster !== 'N/A' ? Poster : './src/img/notfound.png'
+    img.src = Poster !== 'N/A' ? Poster : image
     title.innerHTML = `${Title}(${Year})`
     itemFilm.classList.add('list-item')
     itemFilm.dataset.idFilm = imdbID
