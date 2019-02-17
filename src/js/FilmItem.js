@@ -1,5 +1,5 @@
 import Api from './Api'
-import { removeFromStorage, createFilm } from './helper';
+import { removeFromStorage, createFilm, renderFilmsToFavorites } from './helper';
 import image from '../img/notfound.png'
 
 export const FilmItem = Vue.component('film-item', {
@@ -51,6 +51,6 @@ export const FilmItem = Vue.component('film-item', {
       :id="film.imdbID"
       :class="{ 'fav-click' : this.toggle}" alt
       @click="insertToStorage">♥</button>
-    <p>{{ film.Title }}</p>
+    <p>{{ film.Title }}({{ film.Year }})</p>
   </div>`
 })
