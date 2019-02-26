@@ -1,8 +1,9 @@
-import Api from './Api'
-import { removeFromStorage, createFilm, renderFilmsToFavorites } from './helper';
-import image from '../img/notfound.png'
+import Api from '../Api'
+import { removeFromStorage } from '../helper';
+import image from '../../img/notfound.png'
+import { app } from '../index';
 
-export const FilmItem = Vue.component('film-item', {
+export default Vue.component('film-item', {
   props: ['film', 'image'],
   data: () => {
     return {
@@ -19,9 +20,8 @@ export const FilmItem = Vue.component('film-item', {
       e.preventDefault()
       Api.getFilms(`?i=${this.film.imdbID}`)
       .then( result => {
-        createFilm(result)
-        document.querySelector('.display-1').style.display = 'none'
-        document.querySelector('.display-2').style.display = 'block'
+        app.filmInfo = result
+        app.isOpen = false
       })
     },
     insertToStorage(){
@@ -32,7 +32,6 @@ export const FilmItem = Vue.component('film-item', {
         films.push(this.film)
         try {
           localStorage.setItem('films', JSON.stringify(films))
-          renderFilmsToFavorites()
         } catch (error) {
           console.log(error);
           alert('Память заполнена.')

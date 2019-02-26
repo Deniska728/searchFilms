@@ -7,39 +7,14 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="display-1">
-    <form>
-        <input type="search">
-        <input type="submit" value="Начать поиск">
-    </form>
-    <div class="favorites-container">
-      <p>Избранное:</p>
-      <div class="favorites">
-      </div>
-    </div>
-    <!-- <div class="list-films"></div> -->
-    <div id="app" class="list-films">
-        <film-item
-        v-bind:image="image"
-        v-for="film in films"
-        v-bind:key="film.imdbID"
-        v-bind:film="film"></film-item>
-      </div>
-    <p></p>
-  </div>
-  <div class="display-2">
-    <div class="display-2-header">
-      <button class="exit">&#8592;</button>
-    </div>
-    <div class="display-2-body">
-      <img src="" alt="">
-      <div class="film-info">
-        <h3>Title(1970)</h3>
-        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus totam ducimus, aliquid quo incidunt explicabo quisquam mollitia assumenda labore repellat dolor cumque praesentium laudantium quod amet iste, nostrum, omnis eveniet.</p>
-        <p class="genre"></p>
-        <p class="rating"></p>
-      </div> 
-    </div>
+  <div id="app" >
+    <display-one
+      v-if="isOpen"
+      :films="films"
+      ></display-one>
+    <film-info 
+      v-if="!isOpen"
+      :film="filmInfo"></film-info>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="./bundle.js"></script>

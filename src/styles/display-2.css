@@ -4,7 +4,7 @@ h3, p{
 
 .display-2{
   width: 100%;
-  display: none;
+  /* display: none; */
 }
 
 .display-2-header{
@@ -27,7 +27,7 @@ h3, p{
 
 .fav{
   font-size: 25px;
-  color: #dfdfdf;
+  color: #b9b9b9;
 }
 
 .fav-click{

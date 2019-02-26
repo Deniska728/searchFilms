@@ -86,16 +86,16 @@ form > input[type="submit"]:hover{
 
 .list-item > button {
   position: absolute;
-  width: 30px;
-  height: 30px;
-  margin-top: -30px;
-  top: 0;
-  right: 0;
+  margin-top: 0px;
+  top: 1px;
+  right: 1px;
   background: white;
   z-index: 2;
+  border: 1px solid #2b2b2b;
+  border-radius: 3px;
 }
-
+/* 
 .list-item:hover > button{
   margin-top: 0px;
   transition: 0.3s;
-}
+} */
